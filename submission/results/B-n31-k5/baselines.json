@@ -1,0 +1,26 @@
+[
+  {
+    "method": "nearest-first",
+    "min_service": 0.621451,
+    "balance": 0.621451,
+    "distance": 341
+  },
+  {
+    "method": "proportional",
+    "min_service": 0.694737,
+    "balance": 0.694737,
+    "distance": 480
+  },
+  {
+    "method": "fair-greedy",
+    "min_service": 0.678233,
+    "balance": 0.678233,
+    "distance": 364
+  },
+  {
+    "method": "final_joint_optimizer",
+    "min_service": 0.697161,
+    "balance": 0.697161,
+    "distance": 367
+  }
+]

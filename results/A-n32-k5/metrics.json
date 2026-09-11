@@ -1,0 +1,37 @@
+{
+  "instance": "A-n32-k5",
+  "minimum_service_ratio": 0.6974358974358974,
+  "maximum_service_ratio": 1.0,
+  "balance": 0.6974358974358974,
+  "total_distance": 555,
+  "total_allocated": 287,
+  "fairness_upper_bound": 0.7,
+  "fairness_gap": 0.002564102564102555,
+  "regional_original": {
+    "RIGHT_UP": 0,
+    "LEFT_UP": 47,
+    "LEFT_DOWN": 195,
+    "RIGHT_DOWN": 168
+  },
+  "regional_delivered": {
+    "RIGHT_UP": 0,
+    "LEFT_UP": 33,
+    "LEFT_DOWN": 136,
+    "RIGHT_DOWN": 118
+  },
+  "regional_service": {
+    "RIGHT_UP": 1.0,
+    "LEFT_UP": 0.7021276595744681,
+    "LEFT_DOWN": 0.6974358974358974,
+    "RIGHT_DOWN": 0.7023809523809523
+  },
+  "validation_valid": true,
+  "seed": 42,
+  "solver_config": {
+    "candidate_count": 30,
+    "route_seconds_per_candidate": 3,
+    "allocation_time_limit_ms": 10000,
+    "local_search_iterations": 30,
+    "seed": 42
+  }
+}

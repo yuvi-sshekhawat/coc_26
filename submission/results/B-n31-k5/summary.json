@@ -1,0 +1,38 @@
+{
+  "instance": "B-n31-k5",
+  "runtime_seconds": 41.80357290000029,
+  "minimum_service_ratio": 0.6971608832807571,
+  "maximum_service_ratio": 1.0,
+  "balance": 0.6971608832807571,
+  "total_distance": 367,
+  "total_allocated": 288,
+  "fairness_upper_bound": 0.6990291262135923,
+  "fairness_gap": 0.0018682429328351624,
+  "validation_valid": true,
+  "baselines": [
+    {
+      "method": "nearest-first",
+      "min_service": 0.621451,
+      "balance": 0.621451,
+      "distance": 341
+    },
+    {
+      "method": "proportional",
+      "min_service": 0.694737,
+      "balance": 0.694737,
+      "distance": 480
+    },
+    {
+      "method": "fair-greedy",
+      "min_service": 0.678233,
+      "balance": 0.678233,
+      "distance": 364
+    },
+    {
+      "method": "final_joint_optimizer",
+      "min_service": 0.697161,
+      "balance": 0.697161,
+      "distance": 367
+    }
+  ]
+}

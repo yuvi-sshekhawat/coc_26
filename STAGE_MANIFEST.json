@@ -1,0 +1,16 @@
+{
+  "stage_4": [
+    "src/ai05/routing.py",
+    "src/ai05/stage4_route.py",
+    "src/ai05/metrics.py"
+  ],
+  "stage_5": [
+    "src/ai05/optimization.py",
+    "src/ai05/stage5_joint.py"
+  ],
+  "stage_6": [
+    "src/ai05/optimization.py",
+    "src/ai05/routing.py",
+    "src/ai05/stage6_improve.py"
+  ]
+}

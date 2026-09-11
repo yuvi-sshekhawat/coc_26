@@ -1,0 +1,17 @@
+{
+  "instance": "EXAMPLE_ONLY",
+  "minimum_service_ratio": null,
+  "maximum_service_ratio": null,
+  "balance": null,
+  "total_distance": null,
+  "total_allocated": null,
+  "fairness_upper_bound": null,
+  "fairness_gap": null,
+  "regional_service": {
+    "RIGHT_UP": null,
+    "LEFT_UP": null,
+    "LEFT_DOWN": null,
+    "RIGHT_DOWN": null
+  },
+  "validation_valid": null
+}
