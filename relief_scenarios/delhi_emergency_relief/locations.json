@@ -4,72 +4,77 @@
     "latitude": 28.6139,
     "longitude": 77.209
   },
-  "customers": [
+  "destination": {
+    "name": "AIIMS Emergency Staging Terminal",
+    "latitude": 28.5672,
+    "longitude": 77.21
+  },
+  "houses": [
     {
-      "customer_id": 1,
+      "house_id": 1,
       "location_name": "Rohini Emergency Hub",
       "latitude": 28.715,
       "longitude": 77.115,
       "demand": 50
     },
     {
-      "customer_id": 2,
+      "house_id": 2,
       "location_name": "Dwarka Sector 10 Shelter",
       "latitude": 28.582,
       "longitude": 77.05,
       "demand": 45
     },
     {
-      "customer_id": 3,
+      "house_id": 3,
       "location_name": "Saket Community Center",
       "latitude": 28.524,
       "longitude": 77.21,
       "demand": 40
     },
     {
-      "customer_id": 4,
+      "house_id": 4,
       "location_name": "Mayur Vihar Relief Post",
       "latitude": 28.605,
       "longitude": 77.3,
       "demand": 35
     },
     {
-      "customer_id": 5,
+      "house_id": 5,
       "location_name": "Karol Bagh Depot Annex",
       "latitude": 28.65,
       "longitude": 77.19,
       "demand": 30
     },
     {
-      "customer_id": 6,
+      "house_id": 6,
       "location_name": "Shahdara Supply Center",
       "latitude": 28.67,
       "longitude": 77.29,
       "demand": 55
     },
     {
-      "customer_id": 7,
+      "house_id": 7,
       "location_name": "Janakpuri Crisis Post",
       "latitude": 28.625,
       "longitude": 77.085,
       "demand": 40
     },
     {
-      "customer_id": 8,
+      "house_id": 8,
       "location_name": "Okhla Industrial Relief",
       "latitude": 28.535,
       "longitude": 77.275,
       "demand": 45
     },
     {
-      "customer_id": 9,
+      "house_id": 9,
       "location_name": "Civil Lines Shelter",
       "latitude": 28.68,
       "longitude": 77.22,
       "demand": 30
     },
     {
-      "customer_id": 10,
+      "house_id": 10,
       "location_name": "Lajpat Nagar Hub",
       "latitude": 28.57,
       "longitude": 77.24,

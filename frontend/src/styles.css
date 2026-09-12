@@ -179,7 +179,6 @@ button {
   padding: 0 20px;
   margin-bottom: 20px;
   background: rgba(8, 14, 26, 0.85);
-  backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   position: relative;
@@ -556,7 +555,6 @@ h1 span {
   margin: 20px 0 16px;
   padding: 12px 18px;
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 8px;
   width: fit-content;
@@ -634,7 +632,6 @@ h1 span {
   align-items: center;
   gap: 8px;
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
   color: var(--ink);
   border: 1px solid rgba(255, 255, 255, 0.14);
   padding: 10px 18px;
@@ -662,7 +659,6 @@ h1 span {
 .live-relief-panel,
 .relief-motion-panel {
   background: rgba(11, 18, 33, 0.72);
-  backdrop-filter: blur(14px);
   border: 1px solid rgba(56, 189, 248, 0.16);
   border-radius: 8px;
   padding: 14px 18px;
@@ -816,7 +812,6 @@ h1 span {
 
 .nb-button {
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   color: var(--ink-secondary);
   padding: 8px 16px;
@@ -865,7 +860,6 @@ h1 span {
 
 .status-pill {
   background: rgba(11, 18, 33, 0.75);
-  backdrop-filter: blur(12px);
   border: 1px solid rgba(56, 189, 248, 0.2);
   padding: 8px 16px;
   border-radius: 20px;
@@ -929,7 +923,6 @@ h1 span {
 
 .kpi-card {
   background: rgba(11, 18, 33, 0.45);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 8px;
   padding: 12px 14px;
@@ -1007,7 +1000,6 @@ h1 span {
    ========================================================================== */
 .nb-card {
   background: var(--paper-card);
-  backdrop-filter: blur(12px);
   border: var(--line);
   border-radius: 8px;
   padding: 24px;
@@ -1111,7 +1103,6 @@ h1 span {
 
 .metric-card {
   background: rgba(11, 18, 33, 0.48);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 20px 18px 16px;
@@ -1223,7 +1214,6 @@ h1 span {
 .map-card {
   padding: 24px;
   background: rgba(11, 18, 33, 0.75);
-  backdrop-filter: blur(14px);
   border: 1px solid rgba(56, 189, 248, 0.16);
   border-radius: 10px;
 }
@@ -1294,7 +1284,6 @@ h1 span {
   font-size: 12px;
   flex-wrap: wrap;
   background: rgba(11, 18, 33, 0.75);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 5px 12px;
   border-radius: 6px;
@@ -1517,7 +1506,6 @@ h1 span {
 
 .route-badge-item {
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 16px;
@@ -1600,7 +1588,6 @@ h1 span {
 .comparison-card,
 .history-card {
   background: rgba(11, 18, 33, 0.75);
-  backdrop-filter: blur(14px);
   border: 1px solid rgba(56, 189, 248, 0.16);
   border-radius: 10px;
 }
@@ -2043,7 +2030,6 @@ h1 span {
   align-items: center;
   gap: 8px;
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 9px 16px;
   border-radius: 6px;
@@ -2121,7 +2107,6 @@ h1 span {
   justify-content: space-between;
   align-items: center;
   background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(245, 158, 11, 0.25);
   border-left: 3px solid var(--amber);
   border-radius: 8px;
@@ -2218,9 +2203,8 @@ h1 span {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(11, 15, 25, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #334155;
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 11px;
@@ -2230,9 +2214,8 @@ h1 span {
 }
 
 .hud-scenario-info {
-  background: rgba(11, 15, 25, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0f172a;
+  border: 1px solid #1e293b;
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 12px;
@@ -2245,7 +2228,6 @@ h1 span {
   left: 14px;
   right: 14px;
   background: rgba(15, 23, 42, 0.9);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(245, 158, 11, 0.4);
   border-left: 4px solid var(--amber);
   padding: 8px 14px;
@@ -2537,7 +2519,6 @@ h1 span {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2839,20 +2820,188 @@ h1 span {
   line-height: 1.4;
 }
 
+/* House Marker Visited & Delivery Complete Styles */
+.maplibre-cust-marker {
+  position: relative;
+}
+
+.maplibre-cust-marker.visited {
+  border-color: #10b981 !important;
+  background: #064e3b !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.maplibre-cust-marker.visited .cust-id {
+  color: #a7f3d0 !important;
+  font-weight: 900 !important;
+}
+
+.cust-visited-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 16px;
+  height: 16px;
+  background: #10b981;
+  color: #052e16;
+  border: 1.5px solid #ffffff;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+
+@keyframes visitPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+.maplibre-cust-marker.just-visited {
+  animation: visitPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.veh-marker-label.completed {
+  background: #064e3b !important;
+  border-color: #10b981 !important;
+  color: #a7f3d0 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.7) !important;
+}
+
+.hud-status-tag.complete {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+.hud-status-tag.active {
+  background: rgba(56, 189, 248, 0.2) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+}
+
+/* Fleet Live Status Cards in HUD */
+.hud-fleet-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-height: 190px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.fleet-vcard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.fleet-vcard:hover,
+.fleet-vcard.focused {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.fleet-vcard.is-complete {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.fleet-vcard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fleet-vcard-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #f8fafc;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.fleet-vcard-status-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1.5px 5.5px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.fleet-vcard-status-badge.complete {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+.fleet-vcard-status-badge.en-route {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+}
+
+.fleet-vcard-status-badge.at-depot {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.fleet-vcard-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+
+.fleet-vcard-target {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #cbd5e1;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+
+.fleet-vcard-progress-bar {
+  width: 100%;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fleet-vcard-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
 /* Tactical Dispatch HUD Panel (Floating on Map) */
 .dispatch-hud-panel {
   position: absolute;
   top: 60px;
   left: 16px;
-  width: 320px;
+  width: 330px;
   max-height: calc(100% - 80px);
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 14px 16px;
   z-index: 10;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -3124,14 +3273,12 @@ h1 span {
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 40px);
-  max-width: 720px;
-  background: rgba(11, 15, 25, 0.94);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: #0f172a;
+  border: 1px solid #10b981;
   border-radius: 10px;
   padding: 18px 22px;
   z-index: 20;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -3314,5 +3461,978 @@ h1 span {
   border-color: rgba(239, 68, 68, 0.4);
   background: rgba(239, 68, 68, 0.03);
 }
+/* ==========================================================================
+   NEW LOCATION-BASED SCENARIO CREATOR & MAP ENHANCEMENTS
+   ========================================================================== */
 
+.modal-window.wide {
+  max-width: 820px;
+}
 
+.modal-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-header-desc {
+  margin: 4px 0 0 0;
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+.scenario-preset-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.preset-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.preset-btn {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink-primary);
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.form-section-divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 4px 0;
+  border-top: 1px solid var(--line);
+  margin-top: 6px;
+}
+
+.section-divider-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink-primary);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.house-counter-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.house-counter-badge.exceeded {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.house-generator-strip {
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px dashed rgba(16, 185, 129, 0.3);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.generator-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.generator-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.generator-count-input {
+  width: 64px !important;
+  padding: 6px 8px !important;
+  text-align: center;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.btn-generate-houses {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green);
+  color: #0b0f19;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-generate-houses:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.custom-house-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-house-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  letter-spacing: 0.03em;
+}
+
+.custom-house-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.custom-house-input {
+  background: var(--paper-card);
+  border: var(--line);
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 12px;
+  color: var(--ink-primary);
+  outline: none;
+  flex: 1;
+  min-width: 110px;
+}
+
+.custom-house-input.name {
+  flex: 2;
+  min-width: 160px;
+}
+
+.btn-add-house {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--paper-card);
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  padding: 7px 12px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-add-house:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.staged-houses-container {
+  background: var(--bg);
+  border: var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.staged-houses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.staged-houses-note {
+  font-size: 10.5px;
+  color: var(--ink-secondary);
+  font-weight: 500;
+}
+
+.houses-scroll-table {
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.mini-houses-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+
+.mini-houses-table th,
+.mini-houses-table td {
+  padding: 7px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mini-houses-table th {
+  color: var(--ink-muted);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.demand-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--blue);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.btn-remove-house {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  transition: color 0.15s ease;
+}
+
+.btn-remove-house:hover {
+  color: #ef4444;
+}
+
+/* MapLibre Destination Marker */
+.maplibre-dest-marker {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+
+.dest-marker-pin {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #a855f7;
+  border: 2.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.8), 0 4px 12px rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+}
+
+.dest-marker-label {
+  margin-top: 3px;
+  background: rgba(11, 15, 25, 0.94);
+  color: #c084fc;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid #a855f7;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* House Assigned Vehicle Tag */
+.cust-veh-tag {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #0b0f19;
+  color: #38bdf8;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid #38bdf8;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Route Directions Drawer in HUD */
+.hud-directions-drawer {
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.directions-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.directions-drawer-header b {
+  color: #38bdf8;
+}
+
+.directions-legs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.direction-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.leg-num {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #64748b;
+  font-family: "JetBrains Mono", monospace;
+  min-width: 14px;
+}
+
+.leg-path {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.leg-from,
+.leg-to {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f1f5f9;
+  max-width: 85px;
+}
+
+.leg-arrow {
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.leg-metrics {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  font-family: "JetBrains Mono", monospace;
+  white-space: nowrap;
+}
+/* ==========================================================================
+   INPUT ARCHITECTURE & LOCATION SEARCH COMPONENT STYLES
+   ========================================================================== */
+
+/* Location Search Input */
+.location-search-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.search-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-field-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  letter-spacing: 0.03em;
+}
+
+.search-coord-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.coord-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 8px;
+  transition: all 0.2s ease;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+.search-input-wrapper.is-picking {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 1px #f59e0b;
+}
+
+.search-lead-icon {
+  color: var(--ink-muted);
+  flex-shrink: 0;
+  margin-right: 6px;
+}
+
+.search-text-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 4px;
+  font-size: 12.5px;
+  color: var(--ink-primary);
+  outline: none;
+  min-width: 0;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.search-clear-btn:hover {
+  color: var(--ink-primary);
+}
+
+.search-spinner {
+  color: var(--accent-primary);
+  animation: spin 1s linear infinite;
+  margin-right: 4px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-pick-on-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  color: var(--ink-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.btn-pick-on-map:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ink-primary);
+}
+
+.btn-pick-on-map.active {
+  background: #f59e0b;
+  color: #0b0f19;
+  border-color: #f59e0b;
+  animation: pulse 1.5s infinite;
+}
+
+.search-suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 4px 0;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.suggestion-icon {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.suggestion-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.suggestion-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion-coords {
+  font-size: 10px;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Scenario Input Panel */
+.scenario-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-height: 850px;
+  overflow-y: auto;
+}
+
+.input-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.input-panel-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 2px 0 0 0;
+  color: var(--ink-primary);
+  letter-spacing: -0.02em;
+}
+
+.input-panel-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.input-panel-subtitle {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.input-panel-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scenario-name-input {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--ink-primary);
+  outline: none;
+}
+
+.scenario-name-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.input-section-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-card-header.clickable {
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.section-card-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-card-title {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink-primary);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.required-tag {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.optional-tag {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.house-count-pill {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.house-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.house-range-slider {
+  flex: 1;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+.house-number-input {
+  width: 58px;
+  text-align: center;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 5px;
+  color: var(--ink-primary);
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.btn-auto-populate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px dashed rgba(16, 185, 129, 0.35);
+  color: var(--green);
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-auto-populate:hover {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: var(--green);
+}
+
+.houses-dynamic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.house-input-item {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.house-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.house-idx-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--accent-primary);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.house-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.house-coords-tag {
+  font-size: 9.5px;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.btn-toggle-collapse {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 2px;
+}
+
+.btn-optimize-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--amber);
+  color: #0b0f19;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-family: "JetBrains Mono", monospace;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.btn-optimize-submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-optimize-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #0b0f19;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Map Picking Banner */
+.map-picking-banner {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f59e0b;
+  color: #0b0f19;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Pulse on marker when actively picking */
+.pulse-active {
+  animation: pulseTarget 1s infinite alternate;
+}
+
+@keyframes pulseTarget {
+  from { transform: scale(1); filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.8)); }
+  to { transform: scale(1.15); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 1)); }
+}
+
+/* Operational Split Layout */
+.operations-staging-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  min-height: 720px;
+}
+
+@media (max-width: 1024px) {
+  .operations-staging-layout {
+    grid-template-columns: 1fr;
+  }
+}
+/* Mode Switcher Buttons in Top Bar */
+.nav-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  color: var(--ink-secondary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.nav-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--ink-primary);
+  border-color: var(--accent-primary);
+}
+
+.nav-mode-btn.active {
+  background: var(--accent-primary);
+  color: #0b0f19;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}

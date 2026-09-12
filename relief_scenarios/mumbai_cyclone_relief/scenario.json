@@ -4,8 +4,12 @@
   "depot_name": "Mumbai Harbor Relief Terminal",
   "depot_latitude": 18.94,
   "depot_longitude": 72.84,
+  "destination_name": "KEM Emergency Disaster Facility",
+  "destination_latitude": 19.002,
+  "destination_longitude": 72.842,
+  "total_houses": 8,
   "total_customers": 8,
   "total_demand": 370,
-  "created_at": "2026-09-11T23:02:22.313314+00:00",
+  "created_at": "2026-09-12T08:55:42.587953+00:00",
   "status": "active"
 }

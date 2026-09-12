@@ -5,6 +5,12 @@
     "depot_name": "Mumbai Harbor Relief Terminal",
     "depot_latitude": 18.94,
     "depot_longitude": 72.84,
+    "destination": {
+      "name": "KEM Emergency Disaster Facility",
+      "latitude": 19.002,
+      "longitude": 72.842
+    },
+    "total_houses": 8,
     "total_customers": 8,
     "total_demand": 370,
     "stock": 259,
@@ -15,6 +21,7 @@
     {
       "id": 0,
       "is_depot": true,
+      "is_destination": false,
       "location_name": "Mumbai Harbor Relief Terminal",
       "geographic": {
         "latitude": 18.94,
@@ -31,8 +38,10 @@
     },
     {
       "id": 1,
+      "house_id": 1,
       "customer_id": 1,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Colaba Coastal Center",
       "geographic": {
         "latitude": 18.91,
@@ -49,8 +58,10 @@
     },
     {
       "id": 2,
+      "house_id": 2,
       "customer_id": 2,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Dadar Transit Camp",
       "geographic": {
         "latitude": 19.02,
@@ -67,8 +78,10 @@
     },
     {
       "id": 3,
+      "house_id": 3,
       "customer_id": 3,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Bandra West Relief Point",
       "geographic": {
         "latitude": 19.055,
@@ -85,8 +98,10 @@
     },
     {
       "id": 4,
+      "house_id": 4,
       "customer_id": 4,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Kurla Crisis Warehouse",
       "geographic": {
         "latitude": 19.07,
@@ -103,8 +118,10 @@
     },
     {
       "id": 5,
+      "house_id": 5,
       "customer_id": 5,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Andheri Emergency Shelter",
       "geographic": {
         "latitude": 19.12,
@@ -121,8 +138,10 @@
     },
     {
       "id": 6,
+      "house_id": 6,
       "customer_id": 6,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Worli Evacuation Hub",
       "geographic": {
         "latitude": 19.005,
@@ -139,8 +158,10 @@
     },
     {
       "id": 7,
+      "house_id": 7,
       "customer_id": 7,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Chembur Distribution Base",
       "geographic": {
         "latitude": 19.06,
@@ -157,8 +178,10 @@
     },
     {
       "id": 8,
+      "house_id": 8,
       "customer_id": 8,
       "is_depot": false,
+      "is_destination": false,
       "location_name": "Ghatkopar Relief Center",
       "geographic": {
         "latitude": 19.085,
@@ -174,6 +197,11 @@
       "region": "RIGHT_UP"
     }
   ],
+  "destination": {
+    "name": "KEM Emergency Disaster Facility",
+    "latitude": 19.002,
+    "longitude": 72.842
+  },
   "allocation": [
     0,
     28,

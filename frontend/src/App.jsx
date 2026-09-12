@@ -31,10 +31,9 @@ import {
 } from "lucide-react";
 
 import ReliefMap from "./components/ReliefMap";
-import CreateScenarioModal from "./components/CreateScenarioModal";
-import HeroLogisticsNetwork from "./components/HeroLogisticsNetwork";
+import ScenarioInputPanel from "./components/ScenarioInputPanel";
 
-const API = "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const fallback = {
   instances: ["A-n32-k5", "A-n33-k5", "B-n31-k5"],
@@ -110,7 +109,44 @@ export default function App() {
   const [selectedScenarioId, setSelectedScenarioId] = useState(null);
   const [selectedScenario, setSelectedScenario] = useState(null);
   const [selectedScenarioData, setSelectedScenarioData] = useState(null);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  // App Workflow Mode: "operations" (Real Geographic Operations) | "benchmarks" (CVRPLIB Academic)
+  const [appMode, setAppMode] = useState("operations");
+  const [isStagingMode, setIsStagingMode] = useState(false);
+
+  // Staging Form State
+  const [stagingName, setStagingName] = useState("Jaipur Emergency Flood Response");
+  const [stagingDepot, setStagingDepot] = useState({
+    name: "Jaipur Central Relief Warehouse",
+    latitude: 26.9124,
+    longitude: 75.7873,
+  });
+  const [stagingDestination, setStagingDestination] = useState({
+    name: "Jaipur SMS Medical Center",
+    latitude: 26.8920,
+    longitude: 75.8150,
+  });
+  const [stagingHouseCount, setStagingHouseCount] = useState(12);
+  const [stagingHouses, setStagingHouses] = useState(() => {
+    const list = [];
+    for (let i = 1; i <= 12; i++) {
+      const angle = (i / 12) * 2 * Math.PI + (i * 0.35);
+      const radiusKm = 2.2 + (i % 6) * 1.5;
+      const dLat = (radiusKm / 111.32) * Math.sin(angle);
+      const dLon = (radiusKm / (111.32 * Math.cos((26.9124 * Math.PI) / 180))) * Math.cos(angle);
+      list.push({
+        house_id: i,
+        location_name: `Community Shelter #${i}`,
+        latitude: Number((26.9124 + dLat).toFixed(5)),
+        longitude: Number((75.7873 + dLon).toFixed(5)),
+        demand: 10 + (i % 4) * 5,
+      });
+    }
+    return list;
+  });
+  const [activePickingTarget, setActivePickingTarget] = useState(null);
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [stagingError, setStagingError] = useState("");
 
   // Aesthetic and interactive state
   const [theme, setTheme] = useState(() => {
@@ -137,13 +173,117 @@ export default function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const refreshScenarios = () => {
+  const refreshScenarios = (autoSelectFirst = false) => {
     fetch(`${API}/api/scenarios`)
       .then((r) => r.json())
       .then((data) => {
-        if (data.scenarios) setScenarios(data.scenarios);
+        if (data.scenarios) {
+          setScenarios(data.scenarios);
+          if (autoSelectFirst && data.scenarios.length > 0 && !selectedScenarioId) {
+            handleSelectScenario(data.scenarios[0].id);
+          }
+        }
       })
       .catch(() => {});
+  };
+
+  const handleMapClickPoint = ([lon, lat], target) => {
+    const roundedLat = Number(lat.toFixed(5));
+    const roundedLon = Number(lon.toFixed(5));
+
+    if (target === "depot") {
+      setStagingDepot((prev) => ({
+        ...prev,
+        name: prev?.name || "Selected Staging Depot",
+        latitude: roundedLat,
+        longitude: roundedLon,
+      }));
+      setActivePickingTarget(null);
+    } else if (target === "destination") {
+      setStagingDestination((prev) => ({
+        ...prev,
+        name: prev?.name || "Selected Target Destination",
+        latitude: roundedLat,
+        longitude: roundedLon,
+      }));
+      setActivePickingTarget(null);
+    } else if (target && target.startsWith("house_")) {
+      const idx = parseInt(target.replace("house_", ""), 10);
+      setStagingHouses((prev) => {
+        const copy = [...prev];
+        if (copy[idx]) {
+          copy[idx] = {
+            ...copy[idx],
+            latitude: roundedLat,
+            longitude: roundedLon,
+          };
+        }
+        return copy;
+      });
+      setActivePickingTarget(null);
+    }
+  };
+
+  const handleStagingSubmit = async () => {
+    setStagingError("");
+    if (!stagingDepot?.latitude || !stagingDepot?.longitude) {
+      setStagingError("Please specify a valid depot / source location.");
+      return;
+    }
+    if (!stagingHouses || stagingHouses.length === 0) {
+      setStagingError("At least 1 house location is required.");
+      return;
+    }
+    if (stagingHouses.length > 50) {
+      setStagingError("Maximum 50 houses allowed per relief scenario.");
+      return;
+    }
+    const hasMissing = stagingHouses.some((h) => !h.latitude || !h.longitude);
+    if (hasMissing) {
+      setStagingError("All houses must have valid latitude and longitude coordinates.");
+      return;
+    }
+
+    setIsOptimizing(true);
+    try {
+      const payload = {
+        name: stagingName.trim() || `${stagingDepot.name.split(" ")[0]} Relief Operation`,
+        depot_name: stagingDepot.name.trim() || "Central Relief Warehouse",
+        depot_latitude: stagingDepot.latitude,
+        depot_longitude: stagingDepot.longitude,
+        destination_name: stagingDestination?.name?.trim() || null,
+        destination_latitude: stagingDestination?.latitude || null,
+        destination_longitude: stagingDestination?.longitude || null,
+        houses: stagingHouses.map((h, i) => ({
+          house_id: h.house_id || i + 1,
+          location_name: h.location_name || `House #${i + 1}`,
+          latitude: h.latitude,
+          longitude: h.longitude,
+          demand: h.demand || 10,
+        })),
+        auto_solve: true,
+      };
+
+      const res = await fetch(`${API}/api/scenarios`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || "Optimization failed.");
+      }
+
+      const created = await res.json();
+      refreshScenarios();
+      handleSelectScenario(created.metadata.id);
+      setIsStagingMode(false);
+    } catch (err) {
+      setStagingError(err.message);
+    } finally {
+      setIsOptimizing(false);
+    }
   };
 
   useEffect(() => {
@@ -151,7 +291,7 @@ export default function App() {
       .then((r) => r.json())
       .then((data) => setInstances(data.instances ?? fallback.instances))
       .catch(() => {});
-    refreshScenarios();
+    refreshScenarios(true);
   }, []);
 
   const loadInstanceData = (name) => {
@@ -257,6 +397,12 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleStartNewScenario = () => {
+    setIsStagingMode(true);
+    setAppMode("operations");
+    setActiveTab("satellite");
   };
 
   // Max route length for simulation
@@ -369,13 +515,30 @@ export default function App() {
         </div>
 
         <div className="nav-links-group">
-          <a href="#hero" className="nav-link active">Dashboard</a>
-          <a href="#scenarios" className="nav-link">Scenarios</a>
-          <a href="#scorecard" className="nav-link">Scorecard</a>
-          <a href="#operational-map" className="nav-link">Map</a>
-          <a href="#fairness-grid" className="nav-link">Fairness</a>
-          <a href="#fairness-grid" className="nav-link">Validation</a>
-          <a href="#benchmarks" className="nav-link">Benchmarks</a>
+          <button
+            type="button"
+            className={`nav-mode-btn ${appMode === "operations" ? "active" : ""}`}
+            onClick={() => {
+              setAppMode("operations");
+              if (scenarios.length > 0 && !selectedScenarioId) {
+                handleSelectScenario(scenarios[0].id);
+              }
+            }}
+          >
+            <Compass size={14} />
+            <span>REAL-WORLD OPERATIONS</span>
+          </button>
+          <button
+            type="button"
+            className={`nav-mode-btn ${appMode === "benchmarks" ? "active" : ""}`}
+            onClick={() => {
+              setAppMode("benchmarks");
+              handleClearScenario();
+            }}
+          >
+            <Award size={14} />
+            <span>CVRPLIB BENCHMARKS</span>
+          </button>
         </div>
 
         <div className="nav-right-group">
@@ -403,16 +566,7 @@ export default function App() {
 
       {/* UNIFIED COMMAND CENTER OPERATIONAL STAGE (HERO -> SCENARIOS -> KPIS -> SCORECARD) */}
       <div className="command-center-stage">
-        <HeroLogisticsNetwork
-          scenario={selectedScenario}
-          selectedInstance={selected}
-          simPlaying={simPlaying}
-          simSpeed={simSpeed}
-          animProgress={(simStep / Math.max(1, maxRouteLength - 1)) * 100}
-          theme={theme}
-        />
-
-        {/* ENTERPRISE HERO HEADER (PARTS 5-10) */}
+        {/* ENTERPRISE HERO HEADER */}
         <header className="topbar" id="hero">
           <div className="topbar-content">
           <div className="hero-left-col">
@@ -429,21 +583,21 @@ export default function App() {
               Jointly optimizing lexicographic max-min regional fairness with capacity-constrained vehicle fleet dispatch.
             </p>
 
-            {/* HERO STATISTICS STRIP (PART 7) */}
+            {/* HERO STATISTICS STRIP */}
             <div className="hero-stats-strip">
               <div className="hero-stat-item">
-                <span className="stat-num">3</span>
-                <span className="stat-label">Benchmark Instances</span>
+                <span className="stat-num">{instances.length}</span>
+                <span className="stat-label">Authoritative Benchmarks</span>
               </div>
               <div className="stat-sep" />
               <div className="hero-stat-item">
-                <span className="stat-num">95%</span>
-                <span className="stat-label">Fairness Improvement</span>
+                <span className="stat-num">70%</span>
+                <span className="stat-label">Stock Scarcity Constraint</span>
               </div>
               <div className="stat-sep" />
               <div className="hero-stat-item">
-                <span className="stat-num">42%</span>
-                <span className="stat-label">Route Cost Reduction</span>
+                <span className="stat-num">{scenarios.length}</span>
+                <span className="stat-label">Relief Scenarios</span>
               </div>
             </div>
 
@@ -451,7 +605,7 @@ export default function App() {
             <div className="hero-cta-group">
               <button
                 className="hero-btn-primary"
-                onClick={() => setIsCreateModalOpen(true)}
+                onClick={handleStartNewScenario}
               >
                 <Sparkles size={15} />
                 <span>+ CREATE SCENARIO</span>
@@ -481,20 +635,20 @@ export default function App() {
               </div>
               <div className="live-metrics-grid">
                 <div className="live-metric-box">
-                  <span className="live-metric-val">{routesData?.routes?.length || (selectedScenario ? 3 : 5)}</span>
+                  <span className="live-metric-val">{routesData?.routes?.length ?? "—"}</span>
                   <span className="live-metric-lbl">Active Vehicles</span>
                 </div>
                 <div className="live-metric-box">
-                  <span className="live-metric-val">{allocData?.nodes?.length ? allocData.nodes.length - 1 : (selectedScenario?.total_customers || 18)}</span>
+                  <span className="live-metric-val">{allocData?.nodes?.length ? allocData.nodes.length - 1 : (selectedScenario?.total_customers ?? "—")}</span>
                   <span className="live-metric-lbl">Locations</span>
                 </div>
                 <div className="live-metric-box">
-                  <span className="live-metric-val">{metrics?.total_distance ? `${metrics.total_distance} km` : "186.4 km"}</span>
-                  <span className="live-metric-lbl">Total Distance</span>
+                  <span className="live-metric-val">{metrics?.total_distance ? `${metrics.total_distance}` : "—"}</span>
+                  <span className="live-metric-lbl">CVRP Distance</span>
                 </div>
                 <div className="live-metric-box">
-                  <span className="live-metric-val">{selectedScenario ? "3h 00m" : "4h 21m"}</span>
-                  <span className="live-metric-lbl">Estimated Time</span>
+                  <span className="live-metric-val">{metrics?.runtime_seconds ? `${metrics.runtime_seconds.toFixed(1)}s` : (selectedScenario ? "Active" : "—")}</span>
+                  <span className="live-metric-lbl">Solver Runtime</span>
                 </div>
               </div>
             </div>
@@ -543,10 +697,13 @@ export default function App() {
             </div>
             <div className="scenarios-actions-row">
               <button
-                className="btn-create-scenario"
-                onClick={() => setIsCreateModalOpen(true)}
+                className={`btn-create-scenario ${isStagingMode ? "active" : ""}`}
+                onClick={() => {
+                  setIsStagingMode((prev) => !prev);
+                  setActiveTab("satellite");
+                }}
               >
-                <Sparkles size={14} /> + CREATE NEW SCENARIO
+                <Sparkles size={14} /> {isStagingMode ? "← VIEW DISPATCH MAP" : "+ NEW STAGING / INPUT"}
               </button>
             </div>
           </div>
@@ -576,19 +733,57 @@ export default function App() {
         </NbCard>
       </section>
 
-      {/* ACTIVE SCENARIO HERO BANNER (PART 11) */}
-      {selectedScenario && (
+      {/* STAGING & INPUT EXPERIENCE (MAX 50 HOUSES + REAL GEOGRAPHIC MAP) */}
+      {appMode === "operations" && isStagingMode && (
+        <div className="operations-staging-layout">
+          <ScenarioInputPanel
+            scenarioName={stagingName}
+            onScenarioNameChange={setStagingName}
+            depot={stagingDepot}
+            onDepotChange={setStagingDepot}
+            destination={stagingDestination}
+            onDestinationChange={setStagingDestination}
+            houseCount={stagingHouseCount}
+            onHouseCountChange={setStagingHouseCount}
+            houses={stagingHouses}
+            onHousesChange={setStagingHouses}
+            activePickingTarget={activePickingTarget}
+            onSetActivePickingTarget={setActivePickingTarget}
+            onSubmit={handleStagingSubmit}
+            isOptimizing={isOptimizing}
+            error={stagingError}
+          />
+          <div className="staging-map-container" style={{ minHeight: "680px", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--line)", position: "relative" }}>
+            <ReliefMap
+              isStagingMode={true}
+              stagingDepot={stagingDepot}
+              stagingDestination={stagingDestination}
+              stagingHouses={stagingHouses}
+              activePickingTarget={activePickingTarget}
+              onMapClickPoint={handleMapClickPoint}
+              theme={theme}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ACTIVE SCENARIO HERO BANNER */}
+      {appMode === "operations" && !isStagingMode && selectedScenario && (
         <div className="scenario-hero-banner">
           <div className="hero-scenario-details">
             <div className="section-kicker">ACTIVE GEOSPATIAL OPERATION</div>
             <h2>{selectedScenario.name}</h2>
             <div className="hero-scenario-depot">
               <Building2 size={15} color="#f59e0b" />
-              <span>Depot: <b>{selectedScenario.depot_name}</b></span>
+              <span>Depot: <b>{selectedScenario.depot_name}</b> ({selectedScenario.depot_latitude?.toFixed(4)}° N, {selectedScenario.depot_longitude?.toFixed(4)}° E)</span>
+              {selectedScenario.destination_name && (
+                <>
+                  <span>•</span>
+                  <span>Destination: <b style={{ color: "#a855f7" }}>{selectedScenario.destination_name}</b></span>
+                </>
+              )}
               <span>•</span>
-              <span>Coords: {selectedScenario.depot_latitude?.toFixed(4)}° N, {selectedScenario.depot_longitude?.toFixed(4)}° E</span>
-              <span>•</span>
-              <span><b>{selectedScenario.total_customers || "—"}</b> Locations</span>
+              <span><b>{selectedScenario.total_houses || selectedScenario.total_customers || "—"}</b> Houses</span>
               <span>•</span>
               <span>Demand: <b>{selectedScenario.total_demand || "—"}</b> units</span>
             </div>
@@ -629,7 +824,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* HORIZONTAL KPI SUMMARY ROW (PARTS 13 & 14) */}
+      {/* HORIZONTAL KPI SUMMARY ROW */}
       <section className="kpi-summary-strip">
         <div className="kpi-card">
           <div className="kpi-icon-box blue">
@@ -640,7 +835,7 @@ export default function App() {
             <div className="kpi-val">
               {allocData?.nodes
                 ? allocData.nodes.reduce((s, n) => s + (n.original_demand || 0), 0)
-                : selectedScenario?.total_demand || (metrics ? Math.round(metrics.total_allocated / (metrics.minimum_service_ratio || 0.7)) : 580)}
+                : selectedScenario?.total_demand ?? "—"}
               <span className="kpi-unit"> units</span>
             </div>
           </div>
@@ -653,8 +848,7 @@ export default function App() {
           <div className="kpi-content">
             <div className="kpi-label">DELIVERED SUPPLY</div>
             <div className="kpi-val">
-              {metrics?.total_allocated ||
-                (allocData?.nodes ? allocData.nodes.reduce((s, n) => s + (n.allocated_demand || 0), 0) : 406)}
+              {metrics ? metrics.total_allocated : (allocData?.nodes ? allocData.nodes.reduce((s, n) => s + (n.allocated_demand || 0), 0) : "—")}
               <span className="kpi-unit"> units</span>
             </div>
           </div>
@@ -667,7 +861,7 @@ export default function App() {
           <div className="kpi-content">
             <div className="kpi-label">FAIRNESS SCORE</div>
             <div className="kpi-val">
-              {metrics ? `${(metrics.minimum_service_ratio * 100).toFixed(1)}%` : "69.7%"}
+              {metrics ? `${(metrics.minimum_service_ratio * 100).toFixed(1)}%` : "—"}
               <span className="kpi-unit"> min</span>
             </div>
           </div>
@@ -682,7 +876,7 @@ export default function App() {
             <div className="kpi-val">
               {selectedScenarioData?.solution?.routes?.reduce((s, r) => s + (r.road_distance_km || 0), 0)
                 ? `${selectedScenarioData.solution.routes.reduce((s, r) => s + (r.road_distance_km || 0), 0).toFixed(1)} km`
-                : metrics?.total_distance ? `${metrics.total_distance}` : "555"}
+                : metrics?.total_distance ? `${metrics.total_distance}` : "—"}
             </div>
           </div>
         </div>
@@ -694,7 +888,7 @@ export default function App() {
           <div className="kpi-content">
             <div className="kpi-label">ESTIMATED TIME</div>
             <div className="kpi-val">
-              {selectedScenario ? "3h 00m" : metrics?.runtime_seconds ? `${metrics.runtime_seconds.toFixed(1)}s` : "35.0s"}
+              {metrics?.runtime_seconds ? `${metrics.runtime_seconds.toFixed(1)}s` : (selectedScenario ? "Active" : "—")}
             </div>
           </div>
         </div>
@@ -706,8 +900,8 @@ export default function App() {
           <div className="kpi-content">
             <div className="kpi-label">FLEET VEHICLES</div>
             <div className="kpi-val">
-              {routesData?.routes?.length || (selectedScenario ? 3 : 5)}
-              <span className="kpi-unit"> / {allocData?.vehicles || (selectedScenario ? 3 : 5)}</span>
+              {routesData?.routes?.length ?? "—"}
+              <span className="kpi-unit"> / {allocData?.vehicles || routesData?.routes?.length || "—"}</span>
             </div>
           </div>
         </div>
@@ -836,8 +1030,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* SIMULATION & FILTER BAR */}
-          {activeTab === "routes" && (
+          {/* SIMULATION & FILTER BAR (BENCHMARK MODE ONLY) */}
+          {appMode === "benchmarks" && activeTab === "routes" && (
             <div className="simulation-bar">
               <div className="sim-controls">
                 <button
@@ -950,7 +1144,7 @@ export default function App() {
                 </p>
                 <button
                   className="nb-button primary"
-                  onClick={() => setIsCreateModalOpen(true)}
+                  onClick={handleStartNewScenario}
                 >
                   <Sparkles size={14} /> CREATE RELIEF SCENARIO
                 </button>
@@ -1463,14 +1657,24 @@ export default function App() {
               { key: "vehicle_capacity", label: "Route loads obey published vehicle capacity" },
               { key: "route_coverage", label: "Every q_i > 0 served exactly once; zero unallocated served" },
               { key: "customer_uniqueness", label: "Single-visit invariant (zero duplicate customer visits)" },
-            ].map((item) => (
-              <div className="check-row" key={item.key}>
-                <div className="check-icon-box">
-                  <CheckCircle2 size={15} color="var(--green)" />
+            ].map((item) => {
+              const isPassed = validation?.checks ? validation.checks[item.key] === true : Boolean(validation?.valid);
+              const isFailed = validation?.checks ? validation.checks[item.key] === false : false;
+              return (
+                <div className="check-row" key={item.key}>
+                  <div className="check-icon-box">
+                    {isPassed ? (
+                      <CheckCircle2 size={15} color="var(--green)" />
+                    ) : isFailed ? (
+                      <AlertTriangle size={15} color="#ef4444" />
+                    ) : (
+                      <Clock size={15} color="var(--ink-secondary)" />
+                    )}
+                  </div>
+                  <span className="check-text">{item.label}</span>
                 </div>
-                <span className="check-text">{item.label}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {validation?.errors && validation.errors.length > 0 && (
@@ -1598,16 +1802,6 @@ export default function App() {
         </NbCard>
       </section>
 
-      {/* CREATE SCENARIO MODAL */}
-      <CreateScenarioModal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-        onCreated={(created) => {
-          refreshScenarios();
-          handleSelectScenario(created.metadata.id);
-        }}
-        apiBase={API}
-      />
 
       {/* PROFESSIONAL LOGISTICS FOOTER */}
       <footer className="footer">

@@ -5,6 +5,7 @@ import math
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import Optional
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC_DIR = ROOT / "src"
@@ -19,7 +20,6 @@ from pydantic import BaseModel, Field
 from ai05.loader import load_instance
 from ai05.regions import prepare_regions
 from ai05.validation import validate_all
-from .services.scenario_adapter import parse_and_validate_csv
 from .services.scenario_store import (
     create_scenario,
     get_scenario,
@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="AI-05 Fair Relief Planner API",
-    version="1.0.0",
+    version="2.0.0",
     lifespan=lifespan,
 )
 
@@ -55,12 +55,12 @@ app.add_middleware(
 
 class HealthResponse(BaseModel):
     status: str
-    stage: int = Field(10)
+    version: str = "2.0.0"
 
 
 @app.get("/api/health", response_model=HealthResponse)
 def health() -> HealthResponse:
-    return HealthResponse(status="ok", stage=10)
+    return HealthResponse(status="ok", version="2.0.0")
 
 
 @app.get("/api/instances")
@@ -76,17 +76,24 @@ def list_instances():
 # RELIEF SCENARIO SYSTEM (Real-World Logistics & MapLibre Integration)
 # =====================================================================
 
+class HouseInput(BaseModel):
+    house_id: Optional[int] = Field(None, description="Unique house identifier")
+    location_name: str = Field(..., min_length=1, description="Community / House Location Name")
+    latitude: float = Field(..., ge=-90.0, le=90.0)
+    longitude: float = Field(..., ge=-180.0, le=180.0)
+    demand: int = Field(10, ge=1, le=500, description="Estimated household supply demand units")
+
+
 class CreateScenarioRequest(BaseModel):
-    name: str = Field(..., description="Scenario Name e.g. Jaipur Flood Relief")
-    depot_name: str = Field(..., description="Depot Name e.g. Jaipur Central Relief Warehouse")
+    name: str = Field(..., min_length=1, description="Scenario Name e.g. Jaipur Flood Relief")
+    depot_name: str = Field(..., min_length=1, description="Source / Depot Name")
     depot_latitude: float = Field(..., ge=-90.0, le=90.0)
     depot_longitude: float = Field(..., ge=-180.0, le=180.0)
-    csv_content: str = Field(..., description="Requirements CSV content")
+    destination_name: Optional[str] = Field(None, description="Optional Destination / Target Staging Name")
+    destination_latitude: Optional[float] = Field(None, ge=-90.0, le=90.0)
+    destination_longitude: Optional[float] = Field(None, ge=-180.0, le=180.0)
+    houses: list[HouseInput] = Field(..., min_length=1, max_length=50, description="List of houses, max 50")
     auto_solve: bool = Field(True, description="Whether to run AI-05 allocation immediately")
-
-
-class ValidateCsvRequest(BaseModel):
-    csv_content: str
 
 
 @app.get("/api/scenarios")
@@ -110,7 +117,10 @@ def create_new_scenario(req: CreateScenarioRequest):
             depot_name=req.depot_name,
             depot_latitude=req.depot_latitude,
             depot_longitude=req.depot_longitude,
-            csv_content=req.csv_content,
+            destination_name=req.destination_name,
+            destination_latitude=req.destination_latitude,
+            destination_longitude=req.destination_longitude,
+            houses=[h.model_dump() for h in req.houses],
             auto_solve=req.auto_solve,
         )
         return created
@@ -130,33 +140,9 @@ def solve_single_scenario(scenario_id: str):
         raise HTTPException(status_code=500, detail=f"Failed to solve scenario: {e}")
 
 
-@app.post("/api/scenarios/validate-csv")
-def validate_csv_preview(req: ValidateCsvRequest):
-    try:
-        records = parse_and_validate_csv(req.csv_content)
-        total_demand = sum(r.demand for r in records)
-        return {
-            "valid": True,
-            "total_customers": len(records),
-            "total_demand": total_demand,
-            "estimated_stock": int(math.floor(0.70 * total_demand)),
-            "preview": [
-                {
-                    "customer_id": r.customer_id,
-                    "location_name": r.location_name,
-                    "latitude": r.latitude,
-                    "longitude": r.longitude,
-                    "demand": r.demand,
-                }
-                for r in records[:5]
-            ],
-        }
-    except ValueError as e:
-        return {
-            "valid": False,
-            "error": str(e),
-        }
-
+# =====================================================================
+# BENCHMARK RESULT SYSTEM (Authoritative CVRPLIB Instances)
+# =====================================================================
 
 @app.get("/api/results")
 def list_results():

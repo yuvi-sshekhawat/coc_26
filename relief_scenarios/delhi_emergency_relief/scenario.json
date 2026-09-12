@@ -4,8 +4,12 @@
   "depot_name": "Delhi Central Warehouse",
   "depot_latitude": 28.6139,
   "depot_longitude": 77.209,
+  "destination_name": "AIIMS Emergency Staging Terminal",
+  "destination_latitude": 28.5672,
+  "destination_longitude": 77.21,
+  "total_houses": 10,
   "total_customers": 10,
   "total_demand": 405,
-  "created_at": "2026-09-11T23:02:14.341208+00:00",
+  "created_at": "2026-09-12T08:55:28.859610+00:00",
   "status": "active"
 }

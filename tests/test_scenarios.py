@@ -1,3 +1,4 @@
+import shutil
 import sys
 from pathlib import Path
 from fastapi.testclient import TestClient
@@ -38,7 +39,7 @@ def test_get_scenario_detail():
     assert len(sol["routes"]) > 0
     assert len(sol["nodes"]) > 0
 
-    # Verify Coordinate Separation (Part 15)
+    # Verify Coordinate Separation
     depot_node = sol["nodes"][0]
     assert depot_node["is_depot"] is True
     assert "geographic" in depot_node
@@ -56,68 +57,20 @@ def test_get_scenario_detail():
     assert customer_node["allocated_demand"] >= 0
 
 
-def test_validate_csv_success():
-    valid_csv = """customer_id,location_name,latitude,longitude,demand
-1,Center Alpha,26.9124,75.7873,40
-2,Center Beta,26.8950,75.8120,30
-3,Center Gamma,26.8500,75.7600,50
-"""
-    response = client.post("/api/scenarios/validate-csv", json={"csv_content": valid_csv})
-    assert response.status_code == 200
-    data = response.json()
-    assert data["valid"] is True
-    assert data["total_customers"] == 3
-    assert data["total_demand"] == 120
-    assert data["estimated_stock"] == 84  # floor(0.70 * 120)
-
-
-def test_validate_csv_failures():
-    # Missing required column
-    bad_csv_1 = "customer_id,location_name,latitude,demand\n1,Alpha,26.9,50\n"
-    res1 = client.post("/api/scenarios/validate-csv", json={"csv_content": bad_csv_1})
-    assert res1.json()["valid"] is False
-    assert "Missing required CSV columns" in res1.json()["error"]
-
-    # Duplicate customer ID
-    bad_csv_2 = """customer_id,location_name,latitude,longitude,demand
-1,Alpha,26.9,75.7,50
-1,Beta,26.8,75.8,30
-"""
-    res2 = client.post("/api/scenarios/validate-csv", json={"csv_content": bad_csv_2})
-    assert res2.json()["valid"] is False
-    assert "Duplicate 'customer_id'" in res2.json()["error"]
-
-    # Invalid latitude
-    bad_csv_3 = """customer_id,location_name,latitude,longitude,demand
-1,Alpha,999.0,75.7,50
-"""
-    res3 = client.post("/api/scenarios/validate-csv", json={"csv_content": bad_csv_3})
-    assert res3.json()["valid"] is False
-    assert "out of bounds" in res3.json()["error"]
-
-    # Invalid demand (non-positive)
-    bad_csv_4 = """customer_id,location_name,latitude,longitude,demand
-1,Alpha,26.9,75.7,-10
-"""
-    res4 = client.post("/api/scenarios/validate-csv", json={"csv_content": bad_csv_4})
-    assert res4.json()["valid"] is False
-    assert "strictly positive" in res4.json()["error"]
-
-
-import shutil
-
-def test_create_and_solve_custom_scenario():
-    csv_data = """customer_id,location_name,latitude,longitude,demand
-1,Test Clinic 1,26.9200,75.7900,25
-2,Test Clinic 2,26.8800,75.8200,35
-3,Test Clinic 3,26.9500,75.7500,40
-"""
+def test_create_and_solve_custom_scenario_structured():
     payload = {
         "name": "Custom Test Relief Operation",
         "depot_name": "Test Staging Facility",
         "depot_latitude": 26.9100,
         "depot_longitude": 75.7800,
-        "csv_content": csv_data,
+        "destination_name": "Test Destination Hospital",
+        "destination_latitude": 26.8900,
+        "destination_longitude": 75.8100,
+        "houses": [
+            {"house_id": 1, "location_name": "Test Clinic 1", "latitude": 26.9200, "longitude": 75.7900, "demand": 25},
+            {"house_id": 2, "location_name": "Test Clinic 2", "latitude": 26.8800, "longitude": 75.8200, "demand": 35},
+            {"house_id": 3, "location_name": "Test Clinic 3", "latitude": 26.9500, "longitude": 75.7500, "demand": 40},
+        ],
         "auto_solve": True,
     }
     test_scenario_dir = ROOT / "relief_scenarios" / "custom_test_relief_operation"
@@ -128,6 +81,51 @@ def test_create_and_solve_custom_scenario():
         assert data["metadata"]["name"] == "Custom Test Relief Operation"
         assert data["is_solved"] is True
         assert data["solution"]["validation"]["valid"] is True
+        assert data["metadata"]["destination_name"] == "Test Destination Hospital"
+        assert len(data["solution"]["routes"]) > 0
     finally:
         if test_scenario_dir.exists():
             shutil.rmtree(test_scenario_dir, ignore_errors=True)
+
+
+def test_create_scenario_max_houses_limit():
+    # 51 houses must be rejected (max limit is 50)
+    oversized_houses = [
+        {"house_id": i, "location_name": f"House {i}", "latitude": 26.9 + (i * 0.001), "longitude": 75.7 + (i * 0.001), "demand": 10}
+        for i in range(1, 52)
+    ]
+    payload = {
+        "name": "Oversized Operation",
+        "depot_name": "Depot",
+        "depot_latitude": 26.9,
+        "depot_longitude": 75.7,
+        "houses": oversized_houses,
+    }
+    response = client.post("/api/scenarios", json=payload)
+    assert response.status_code in (400, 422)
+
+
+def test_create_scenario_zero_houses_fails():
+    payload = {
+        "name": "Empty Operation",
+        "depot_name": "Depot",
+        "depot_latitude": 26.9,
+        "depot_longitude": 75.7,
+        "houses": [],
+    }
+    response = client.post("/api/scenarios", json=payload)
+    assert response.status_code in (400, 422)
+
+
+def test_create_scenario_invalid_coordinates():
+    payload = {
+        "name": "Invalid Coords Operation",
+        "depot_name": "Depot",
+        "depot_latitude": 195.0,  # Invalid latitude
+        "depot_longitude": 75.7,
+        "houses": [
+            {"house_id": 1, "location_name": "House 1", "latitude": 26.9, "longitude": 75.7, "demand": 10}
+        ],
+    }
+    response = client.post("/api/scenarios", json=payload)
+    assert response.status_code == 422
