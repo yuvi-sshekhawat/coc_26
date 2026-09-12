@@ -243,6 +243,13 @@ export default function ReliefMap({
         const houseEl = document.createElement("div");
         houseEl.className = `maplibre-cust-marker staging-house-pin ${isCurrentPicking ? "pulse-active" : ""}`;
         houseEl.style.setProperty("--cust-color", "#38bdf8");
+        houseEl.style.width = "18px";
+        houseEl.style.height = "18px";
+        houseEl.style.minWidth = "18px";
+        houseEl.style.minHeight = "18px";
+        houseEl.style.maxWidth = "18px";
+        houseEl.style.maxHeight = "18px";
+        houseEl.style.borderRadius = "50%";
         houseEl.innerHTML = `<span class="cust-id">#${idx + 1}</span>`;
 
         const m = new maplibregl.Marker({ element: houseEl, anchor: "center" })
@@ -537,9 +544,15 @@ export default function ReliefMap({
       const houseEl = document.createElement("div");
       houseEl.className = `maplibre-cust-marker ${selectedNode?.id === node.id ? "selected" : ""}`;
       houseEl.style.setProperty("--cust-color", vehColor);
+      houseEl.style.width = "18px";
+      houseEl.style.height = "18px";
+      houseEl.style.minWidth = "18px";
+      houseEl.style.minHeight = "18px";
+      houseEl.style.maxWidth = "18px";
+      houseEl.style.maxHeight = "18px";
+      houseEl.style.borderRadius = "50%";
       houseEl.innerHTML = `
         <span class="cust-id">${node.id}</span>
-        ${vehId ? `<span class="cust-veh-tag">V${vehId}</span>` : ""}
         <span class="cust-visited-badge" style="display: none;">✓</span>
       `;
 

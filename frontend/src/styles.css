@@ -1570,7 +1570,40 @@ h1 span {
   font-size: 11px;
   color: var(--ink-muted);
   line-height: 1.4;
-  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.v-stop-dots {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  row-gap: 4px;
+}
+
+.v-stop-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary, #38bdf8);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.v-stop-dot.depot {
+  background: var(--amber, #f59e0b);
+}
+
+.v-stop-connector {
+  display: inline-block;
+  height: 1.5px;
+  width: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -2294,29 +2327,44 @@ h1 span {
 }
 
 .maplibre-cust-marker {
+  position: relative;
   cursor: pointer;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  box-sizing: border-box;
   background: var(--cust-color, #38bdf8);
-  border: 2px solid #000;
-  border-radius: 50%;
+  border: 2px solid #000000;
+  border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+  overflow: visible;
+  user-select: none;
 }
 
 .maplibre-cust-marker:hover,
 .maplibre-cust-marker.selected {
-  transform: scale(1.3);
-  box-shadow: 0 0 12px var(--cust-color, #38bdf8);
-  border-color: #fff;
-  z-index: 10;
+  transform: scale(1.35);
+  box-shadow: 0 0 10px var(--cust-color, #38bdf8);
+  border-color: #ffffff;
+  z-index: 20;
 }
 
 .maplibre-cust-marker .cust-id {
-  color: #000;
-  font-size: 11px;
+  color: #000000;
+  font-size: 8.5px;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* POPUPS */
@@ -2821,37 +2869,33 @@ h1 span {
 }
 
 /* House Marker Visited & Delivery Complete Styles */
-.maplibre-cust-marker {
-  position: relative;
-}
-
 .maplibre-cust-marker.visited {
-  border-color: #10b981 !important;
-  background: #064e3b !important;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+  border-color: #ffffff !important;
+  background: #10b981 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.9), 0 2px 6px rgba(0, 0, 0, 0.7) !important;
 }
 
 .maplibre-cust-marker.visited .cust-id {
-  color: #a7f3d0 !important;
+  color: #ffffff !important;
   font-weight: 900 !important;
 }
 
 .cust-visited-badge {
   position: absolute;
-  top: -7px;
-  right: -7px;
-  width: 16px;
-  height: 16px;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
   background: #10b981;
-  color: #052e16;
-  border: 1.5px solid #ffffff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   z-index: 3;
 }
 
@@ -3780,17 +3824,7 @@ h1 span {
 
 /* House Assigned Vehicle Tag */
 .cust-veh-tag {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #0b0f19;
-  color: #38bdf8;
-  font-size: 8px;
-  font-weight: 800;
-  padding: 1px 4px;
-  border-radius: 3px;
-  border: 1px solid #38bdf8;
-  font-family: "JetBrains Mono", monospace;
+  display: none !important;
 }
 
 /* Route Directions Drawer in HUD */

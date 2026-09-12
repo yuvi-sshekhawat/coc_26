@@ -1,0 +1,15 @@
+{
+  "id": "jaipur_emergency_flood_response",
+  "name": "Jaipur Emergency Flood Response",
+  "depot_name": "Jaipur Central Relief Warehouse",
+  "depot_latitude": 26.9124,
+  "depot_longitude": 75.7873,
+  "destination_name": "Jaipur SMS Medical Center",
+  "destination_latitude": 26.892,
+  "destination_longitude": 75.815,
+  "total_houses": 21,
+  "total_customers": 21,
+  "total_demand": 365,
+  "created_at": "2026-09-12T10:39:22.314396+00:00",
+  "status": "active"
+}

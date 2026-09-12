@@ -1539,8 +1539,20 @@ export default function App() {
                       </div>
 
                       <div className="v-stops">
-                        <span className="stops-kicker">STOPS:</span>{" "}
-                        {r.location_names ? r.location_names.join(" → ") : r.nodes.join(" → ")}
+                        <span className="stops-kicker">STOPS:</span>
+                        <div className="v-stop-dots">
+                          {(r.location_names || r.nodes).map((stop, si, arr) => (
+                            <React.Fragment key={si}>
+                              <span
+                                className={`v-stop-dot${si === 0 || si === arr.length - 1 ? " depot" : ""}`}
+                                title={stop}
+                              />
+                              {si < arr.length - 1 && (
+                                <span className="v-stop-connector" />
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </div>
                       </div>
 
                       {isRoutingFailed && (

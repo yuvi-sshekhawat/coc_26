@@ -1,0 +1,161 @@
+{
+  "depot": {
+    "name": "Jaipur Central Relief Warehouse",
+    "latitude": 26.9124,
+    "longitude": 75.7873
+  },
+  "destination": {
+    "name": "Jaipur SMS Medical Center",
+    "latitude": 26.892,
+    "longitude": 75.815
+  },
+  "houses": [
+    {
+      "house_id": 1,
+      "location_name": "Community Shelter #1",
+      "latitude": 26.93788,
+      "longitude": 75.81123,
+      "demand": 15
+    },
+    {
+      "house_id": 2,
+      "location_name": "Community Shelter #2",
+      "latitude": 26.95839,
+      "longitude": 75.77811,
+      "demand": 20
+    },
+    {
+      "house_id": 3,
+      "location_name": "Community Shelter #3",
+      "latitude": 26.94235,
+      "longitude": 75.72875,
+      "demand": 25
+    },
+    {
+      "house_id": 4,
+      "location_name": "Community Shelter #4",
+      "latitude": 26.88695,
+      "longitude": 75.70978,
+      "demand": 10
+    },
+    {
+      "house_id": 5,
+      "location_name": "Community Shelter #5",
+      "latitude": 26.83038,
+      "longitude": 75.75431,
+      "demand": 15
+    },
+    {
+      "house_id": 6,
+      "location_name": "Community Shelter #6",
+      "latitude": 26.89534,
+      "longitude": 75.79849,
+      "demand": 20
+    },
+    {
+      "house_id": 7,
+      "location_name": "Community Shelter #7",
+      "latitude": 26.90684,
+      "longitude": 75.82405,
+      "demand": 25
+    },
+    {
+      "house_id": 8,
+      "location_name": "Community Shelter #8",
+      "latitude": 26.94269,
+      "longitude": 75.82718,
+      "demand": 10
+    },
+    {
+      "house_id": 9,
+      "location_name": "Community Shelter #9",
+      "latitude": 26.97258,
+      "longitude": 75.78673,
+      "demand": 15
+    },
+    {
+      "house_id": 10,
+      "location_name": "Community Shelter #10",
+      "latitude": 26.95922,
+      "longitude": 75.72353,
+      "demand": 20
+    },
+    {
+      "house_id": 11,
+      "location_name": "Community Shelter #11",
+      "latitude": 26.89639,
+      "longitude": 75.69124,
+      "demand": 25
+    },
+    {
+      "house_id": 12,
+      "location_name": "Community Shelter #12",
+      "latitude": 26.89518,
+      "longitude": 75.77643,
+      "demand": 10
+    },
+    {
+      "house_id": 13,
+      "location_name": "Community House #13",
+      "latitude": 26.89517,
+      "longitude": 75.75781,
+      "demand": 15
+    },
+    {
+      "house_id": 14,
+      "location_name": "Community House #14",
+      "latitude": 26.86858,
+      "longitude": 75.77625,
+      "demand": 20
+    },
+    {
+      "house_id": 15,
+      "location_name": "Community House #15",
+      "latitude": 26.86257,
+      "longitude": 75.82144,
+      "demand": 25
+    },
+    {
+      "house_id": 16,
+      "location_name": "Community House #16",
+      "latitude": 26.89443,
+      "longitude": 75.86533,
+      "demand": 10
+    },
+    {
+      "house_id": 17,
+      "location_name": "Community House #17",
+      "latitude": 26.95457,
+      "longitude": 75.87051,
+      "demand": 15
+    },
+    {
+      "house_id": 18,
+      "location_name": "Community House #18",
+      "latitude": 26.92666,
+      "longitude": 75.79956,
+      "demand": 20
+    },
+    {
+      "house_id": 19,
+      "location_name": "Community House #19",
+      "latitude": 26.9389,
+      "longitude": 75.80627,
+      "demand": 25
+    },
+    {
+      "house_id": 20,
+      "location_name": "Community House #20",
+      "latitude": 26.95684,
+      "longitude": 75.77997,
+      "demand": 10
+    },
+    {
+      "house_id": 21,
+      "location_name": "Community House #21",
+      "latitude": 26.9623,
+      "longitude": 75.7533,
+      "demand": 15
+    }
+  ]
+}
