@@ -1,0 +1,11 @@
+{
+  "id": "delhi_emergency_relief",
+  "name": "Delhi Emergency Relief",
+  "depot_name": "Delhi Central Warehouse",
+  "depot_latitude": 28.6139,
+  "depot_longitude": 77.209,
+  "total_customers": 10,
+  "total_demand": 405,
+  "created_at": "2026-09-11T23:02:14.341208+00:00",
+  "status": "active"
+}

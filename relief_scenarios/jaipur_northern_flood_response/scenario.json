@@ -1,0 +1,11 @@
+{
+  "id": "jaipur_northern_flood_response",
+  "name": "Jaipur Northern Flood Response",
+  "depot_name": "Jaipur Emergency Staging Warehouse",
+  "depot_latitude": 26.9124,
+  "depot_longitude": 75.7873,
+  "total_customers": 6,
+  "total_demand": 255,
+  "created_at": "2026-09-12T00:01:54.358567+00:00",
+  "status": "active"
+}

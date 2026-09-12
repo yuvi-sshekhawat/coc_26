@@ -1,0 +1,93 @@
+{
+  "depot": {
+    "name": "Jaipur Central Relief Warehouse",
+    "latitude": 26.9124,
+    "longitude": 75.7873
+  },
+  "customers": [
+    {
+      "customer_id": 1,
+      "location_name": "Mansarovar Relief Center",
+      "latitude": 26.85,
+      "longitude": 75.76,
+      "demand": 45
+    },
+    {
+      "customer_id": 2,
+      "location_name": "Vaishali Nagar Community Shelter",
+      "latitude": 26.905,
+      "longitude": 75.742,
+      "demand": 35
+    },
+    {
+      "customer_id": 3,
+      "location_name": "Malviya Nagar Camp",
+      "latitude": 26.854,
+      "longitude": 75.815,
+      "demand": 50
+    },
+    {
+      "customer_id": 4,
+      "location_name": "C-Scheme Emergency Hub",
+      "latitude": 26.91,
+      "longitude": 75.802,
+      "demand": 30
+    },
+    {
+      "customer_id": 5,
+      "location_name": "Amer Relief Point",
+      "latitude": 26.985,
+      "longitude": 75.85,
+      "demand": 60
+    },
+    {
+      "customer_id": 6,
+      "location_name": "Sanganer Distribution Post",
+      "latitude": 26.815,
+      "longitude": 75.77,
+      "demand": 40
+    },
+    {
+      "customer_id": 7,
+      "location_name": "Vidyadhar Nagar Shelter",
+      "latitude": 26.96,
+      "longitude": 75.78,
+      "demand": 35
+    },
+    {
+      "customer_id": 8,
+      "location_name": "Jagatpura Relief Camp",
+      "latitude": 26.82,
+      "longitude": 75.845,
+      "demand": 55
+    },
+    {
+      "customer_id": 9,
+      "location_name": "Jhotwara Logistics Center",
+      "latitude": 26.94,
+      "longitude": 75.72,
+      "demand": 40
+    },
+    {
+      "customer_id": 10,
+      "location_name": "Raja Park Supply Point",
+      "latitude": 26.892,
+      "longitude": 75.828,
+      "demand": 25
+    },
+    {
+      "customer_id": 11,
+      "location_name": "Sitapura Medical Post",
+      "latitude": 26.775,
+      "longitude": 75.835,
+      "demand": 45
+    },
+    {
+      "customer_id": 12,
+      "location_name": "Ajmer Road Transit Camp",
+      "latitude": 26.88,
+      "longitude": 75.69,
+      "demand": 35
+    }
+  ]
+}

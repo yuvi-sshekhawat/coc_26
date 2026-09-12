@@ -1,0 +1,65 @@
+{
+  "depot": {
+    "name": "Mumbai Harbor Relief Terminal",
+    "latitude": 18.94,
+    "longitude": 72.84
+  },
+  "customers": [
+    {
+      "customer_id": 1,
+      "location_name": "Colaba Coastal Center",
+      "latitude": 18.91,
+      "longitude": 72.825,
+      "demand": 40
+    },
+    {
+      "customer_id": 2,
+      "location_name": "Dadar Transit Camp",
+      "latitude": 19.02,
+      "longitude": 72.845,
+      "demand": 50
+    },
+    {
+      "customer_id": 3,
+      "location_name": "Bandra West Relief Point",
+      "latitude": 19.055,
+      "longitude": 72.83,
+      "demand": 45
+    },
+    {
+      "customer_id": 4,
+      "location_name": "Kurla Crisis Warehouse",
+      "latitude": 19.07,
+      "longitude": 72.88,
+      "demand": 60
+    },
+    {
+      "customer_id": 5,
+      "location_name": "Andheri Emergency Shelter",
+      "latitude": 19.12,
+      "longitude": 72.84,
+      "demand": 55
+    },
+    {
+      "customer_id": 6,
+      "location_name": "Worli Evacuation Hub",
+      "latitude": 19.005,
+      "longitude": 72.815,
+      "demand": 35
+    },
+    {
+      "customer_id": 7,
+      "location_name": "Chembur Distribution Base",
+      "latitude": 19.06,
+      "longitude": 72.9,
+      "demand": 40
+    },
+    {
+      "customer_id": 8,
+      "location_name": "Ghatkopar Relief Center",
+      "latitude": 19.085,
+      "longitude": 72.91,
+      "demand": 45
+    }
+  ]
+}

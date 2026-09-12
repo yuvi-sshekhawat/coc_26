@@ -1,6 +1,6 @@
 {
   "instance": "A-n33-k5",
-  "runtime_seconds": 45.02579549999791,
+  "runtime_seconds": 49.63185640000302,
   "minimum_service_ratio": 0.695364238410596,
   "maximum_service_ratio": 0.7692307692307693,
   "balance": 0.9261334691798268,
@@ -14,7 +14,7 @@
       "method": "nearest-first",
       "min_service": 0.535484,
       "balance": 0.535484,
-      "distance": 454
+      "distance": 492
     },
     {
       "method": "proportional",
@@ -26,7 +26,7 @@
       "method": "fair-greedy",
       "min_service": 0.651613,
       "balance": 0.651613,
-      "distance": 459
+      "distance": 457
     },
     {
       "method": "final_joint_optimizer",

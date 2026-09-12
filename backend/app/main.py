@@ -1,7 +1,14 @@
 from __future__ import annotations
 
 import json
+import math
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +18,14 @@ from pydantic import BaseModel, Field
 from ai05.loader import load_instance
 from ai05.regions import prepare_regions
 from ai05.validation import validate_all
+from .services.scenario_adapter import parse_and_validate_csv
+from .services.scenario_store import (
+    create_scenario,
+    get_scenario,
+    init_scenario_storage,
+    list_scenarios,
+    solve_scenario,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,6 +51,11 @@ class HealthResponse(BaseModel):
     stage: int = Field(10)
 
 
+@app.on_event("startup")
+def on_startup():
+    init_scenario_storage()
+
+
 @app.get("/api/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     return HealthResponse(status="ok", stage=10)
@@ -48,6 +68,92 @@ def list_instances():
         "stock_rule": "floor(0.70 * total_demand)",
         "regions": ["RIGHT_UP", "LEFT_UP", "LEFT_DOWN", "RIGHT_DOWN"],
     }
+
+
+# =====================================================================
+# RELIEF SCENARIO SYSTEM (Real-World Logistics & MapLibre Integration)
+# =====================================================================
+
+class CreateScenarioRequest(BaseModel):
+    name: str = Field(..., description="Scenario Name e.g. Jaipur Flood Relief")
+    depot_name: str = Field(..., description="Depot Name e.g. Jaipur Central Relief Warehouse")
+    depot_latitude: float = Field(..., ge=-90.0, le=90.0)
+    depot_longitude: float = Field(..., ge=-180.0, le=180.0)
+    csv_content: str = Field(..., description="Requirements CSV content")
+    auto_solve: bool = Field(True, description="Whether to run AI-05 allocation immediately")
+
+
+class ValidateCsvRequest(BaseModel):
+    csv_content: str
+
+
+@app.get("/api/scenarios")
+def get_all_scenarios():
+    return {"scenarios": list_scenarios()}
+
+
+@app.get("/api/scenarios/{scenario_id}")
+def get_single_scenario(scenario_id: str):
+    try:
+        return get_scenario(scenario_id)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Relief scenario not found.")
+
+
+@app.post("/api/scenarios")
+def create_new_scenario(req: CreateScenarioRequest):
+    try:
+        created = create_scenario(
+            name=req.name,
+            depot_name=req.depot_name,
+            depot_latitude=req.depot_latitude,
+            depot_longitude=req.depot_longitude,
+            csv_content=req.csv_content,
+            auto_solve=req.auto_solve,
+        )
+        return created
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create scenario: {e}")
+
+
+@app.post("/api/scenarios/{scenario_id}/solve")
+def solve_single_scenario(scenario_id: str):
+    try:
+        return solve_scenario(scenario_id)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Relief scenario not found.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to solve scenario: {e}")
+
+
+@app.post("/api/scenarios/validate-csv")
+def validate_csv_preview(req: ValidateCsvRequest):
+    try:
+        records = parse_and_validate_csv(req.csv_content)
+        total_demand = sum(r.demand for r in records)
+        return {
+            "valid": True,
+            "total_customers": len(records),
+            "total_demand": total_demand,
+            "estimated_stock": int(math.floor(0.70 * total_demand)),
+            "preview": [
+                {
+                    "customer_id": r.customer_id,
+                    "location_name": r.location_name,
+                    "latitude": r.latitude,
+                    "longitude": r.longitude,
+                    "demand": r.demand,
+                }
+                for r in records[:5]
+            ],
+        }
+    except ValueError as e:
+        return {
+            "valid": False,
+            "error": str(e),
+        }
 
 
 @app.get("/api/results")

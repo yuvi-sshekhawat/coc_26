@@ -3,7 +3,7 @@
     "method": "nearest-first",
     "min_service": 0.535484,
     "balance": 0.535484,
-    "distance": 454
+    "distance": 492
   },
   {
     "method": "proportional",
@@ -15,7 +15,7 @@
     "method": "fair-greedy",
     "min_service": 0.651613,
     "balance": 0.651613,
-    "distance": 459
+    "distance": 457
   },
   {
     "method": "final_joint_optimizer",

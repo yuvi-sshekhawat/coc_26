@@ -1,6 +1,6 @@
 {
   "instance": "A-n32-k5",
-  "runtime_seconds": 39.32497970000259,
+  "runtime_seconds": 45.425247299997864,
   "minimum_service_ratio": 0.6974358974358974,
   "maximum_service_ratio": 1.0,
   "balance": 0.6974358974358974,
@@ -14,7 +14,7 @@
       "method": "nearest-first",
       "min_service": 0.410256,
       "balance": 0.410256,
-      "distance": 552
+      "distance": 537
     },
     {
       "method": "proportional",

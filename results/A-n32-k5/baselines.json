@@ -3,7 +3,7 @@
     "method": "nearest-first",
     "min_service": 0.410256,
     "balance": 0.410256,
-    "distance": 552
+    "distance": 537
   },
   {
     "method": "proportional",

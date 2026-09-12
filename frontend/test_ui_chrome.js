@@ -59,6 +59,23 @@ async function runTests() {
   const title = await page.$eval("h1", (el) => el.innerText);
   console.log(`PASS: Header rendered: "${title.replace(/\n/g, " ")}"`);
 
+  // Verify Cinematic Animated Logistics Network Canvas
+  await page.waitForSelector(".hero-network-canvas");
+  const networkState = await page.$eval(".hero-network-canvas", (c) => {
+    const style = window.getComputedStyle(c);
+    return {
+      tagName: c.tagName,
+      width: c.width,
+      height: c.height,
+      opacity: parseFloat(style.opacity),
+      display: style.display,
+    };
+  });
+  console.log("PASS: Hero Animated Logistics Network Canvas verified:", networkState);
+  if (networkState.tagName !== "CANVAS" || networkState.width <= 0 || networkState.opacity < 0.6) {
+    throw new Error(`FAIL: Animated logistics network canvas must be active and visible!`);
+  }
+
   // Verify Scorecard
   await page.waitForSelector(".metric-card");
   const metricCards = await page.$$eval(".metric-card", (cards) =>
@@ -161,6 +178,20 @@ async function runTests() {
     }))
   );
   console.log("PASS: Comparison Table rows:", compRows);
+
+  // 7. Test Theme Toggle to Light Mode
+  console.log("7. Testing Theme Toggle: Switching to Light Mode...");
+  const themeToggle = await page.$(".theme-toggle-btn");
+  await themeToggle.click();
+  await new Promise((r) => setTimeout(r, 600));
+
+  const snap6 = path.join(snapshotsDir, "6_dashboard_light_mode_hero_video.png");
+  await page.screenshot({ path: snap6, fullPage: true });
+  console.log(`Snapshot saved: ${snap6}`);
+
+  // Switch back to Dark Mode
+  await themeToggle.click();
+  await new Promise((r) => setTimeout(r, 400));
 
   await browser.close();
 

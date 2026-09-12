@@ -1,0 +1,11 @@
+{
+  "id": "mumbai_cyclone_relief",
+  "name": "Mumbai Cyclone Relief",
+  "depot_name": "Mumbai Harbor Relief Terminal",
+  "depot_latitude": 18.94,
+  "depot_longitude": 72.84,
+  "total_customers": 8,
+  "total_demand": 370,
+  "created_at": "2026-09-11T23:02:22.313314+00:00",
+  "status": "active"
+}

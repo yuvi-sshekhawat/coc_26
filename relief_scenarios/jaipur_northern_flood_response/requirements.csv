@@ -1,0 +1,7 @@
+customer_id,location_name,latitude,longitude,demand
+1,Community Clinic North,26.9350,75.7950,45
+2,Civic Center West,26.9020,75.7480,35
+3,East Sector Hospital,26.8850,75.8250,55
+4,South Shelter Post,26.8450,75.7720,40
+5,Central Transit Point,26.9180,75.8080,30
+6,Riverside Evacuation Base,26.9650,75.8300,50

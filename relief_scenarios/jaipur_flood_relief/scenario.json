@@ -1,0 +1,11 @@
+{
+  "id": "jaipur_flood_relief",
+  "name": "Jaipur Flood Relief",
+  "depot_name": "Jaipur Central Relief Warehouse",
+  "depot_latitude": 26.9124,
+  "depot_longitude": 75.7873,
+  "total_customers": 12,
+  "total_demand": 495,
+  "created_at": "2026-09-11T23:02:06.444890+00:00",
+  "status": "active"
+}

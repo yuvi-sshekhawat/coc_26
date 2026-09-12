@@ -1,0 +1,30 @@
+{
+  "depot": {
+    "name": "Test Staging Facility",
+    "latitude": 26.91,
+    "longitude": 75.78
+  },
+  "customers": [
+    {
+      "customer_id": 1,
+      "location_name": "Test Clinic 1",
+      "latitude": 26.92,
+      "longitude": 75.79,
+      "demand": 25
+    },
+    {
+      "customer_id": 2,
+      "location_name": "Test Clinic 2",
+      "latitude": 26.88,
+      "longitude": 75.82,
+      "demand": 35
+    },
+    {
+      "customer_id": 3,
+      "location_name": "Test Clinic 3",
+      "latitude": 26.95,
+      "longitude": 75.75,
+      "demand": 40
+    }
+  ]
+}
