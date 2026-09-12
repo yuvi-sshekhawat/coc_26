@@ -1,25 +1,48 @@
-# Environment & Secrets
 .env
 .env.local
 .env.*.local
 *.env
 
-# Python
+# Python Virtual Environments
+coc/
+venv/
+.venv/
+env/
+ENV/
+
+# Python Cache & Build Artifacts
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-env/
+*.egg-info/
+.eggs/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Node
+# Node & Frontend
 node_modules/
+frontend/node_modules/
+frontend/dist/
 dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+frontend/snapshots/
+snapshots/
 
-# OS & Editor
+# Archives & Temporary Artifacts
+*.zip
+*.tar.gz
+submission/
+submission_bundle/
+
+# OS & Editors
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.swp
+*.swo

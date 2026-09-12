@@ -1,54 +1,66 @@
-# AI-05 — Fair Essential-Goods Allocation and Routing
+# AI-05 — Fair Essential-Goods Allocation and Routing Platform
 
-Current delivery: Stages 1–3.
+High-performance, constraint-abiding disaster relief logistics optimization engine, FastAPI REST service, and interactive web dashboard.
 
-## Ten-stage roadmap
+---
 
-1. Foundation + constraint contract
-2. Exact CVRPLIB ingestion, distance semantics, quadrant regions
-3. Max-min fair supply allocation
-4. Capacity-constrained vehicle routing
-5. Allocation ↔ routing joint optimization
-6. Local search / multi-start / route-aware improvement
-7. Full validation, experiments, baselines and reproducibility
-8. Neo-brutalist web UI + API integration
-9. Result visualization, comparison dashboard and demo polish
-10. Final benchmark run, report and submission package
+## Architecture Overview
 
-## Current architecture
+1. **Exact CVRPLIB & Regional Ingestion**: Parses standard `.vrp` instances and real-world disaster coordination CSVs, computing exact edge weight matrices and geographic quadrants.
+2. **Max-Min Fair Allocation**: Mathematically prioritizes worst-served regions and customers under bounded supply constraints.
+3. **Capacity-Constrained Vehicle Routing (CVRP)**: Solves multi-vehicle route schedules strictly respecting vehicle capacity and customer delivery quotas.
+4. **Joint Optimization & Local Search**: Iterative candidate exploration and 2-opt route refinement maximizing regional service balance while minimizing travel distance.
+5. **Strict Constraint Contract & Validation**: Centralized validation verifying zero depot allocation, capacity bounds, and non-negativity.
+6. **FastAPI Backend & Interactive Web UI**: RESTful endpoints and interactive dashboard with MapLibre geospatial mapping.
 
-- Canonical instance model
-- Constraint contract
-- CVRPLIB/VRPLIB loader
-- Region assignment
-- Exact distance matrix access
-- Max-min allocation solver
-- Neo-brutalist frontend design tokens
+---
 
-## Install
+## Quick Start
+
+### 1. Python Environment & Dependencies
 
 ```bash
 pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-Put these official CVRPLIB files into `data/`:
-
-- A-n32-k5.vrp
-- A-n33-k5.vrp
-- B-n31-k5.vrp
-
-## Run Stage 2 validation
+### 2. Run Test Suite
 
 ```bash
-python -m ai05.stage2_check data/A-n32-k5.vrp
+python -m pytest tests
 ```
 
-## Run Stage 3 allocation
+### 3. Run Benchmark Suite
 
 ```bash
-python -m ai05.stage3_allocate data/A-n32-k5.vrp
+python scripts/run_final_benchmark.py --seed 42 --candidates 30 --route-seconds 3
+```
+*Or on Windows:*
+```cmd
+run.bat
 ```
 
-## Important design rule
+### 4. Start the Application
 
-Every later stage must use the central constraint contract. No stage is allowed to create a different interpretation of stock, demand bounds, regions, route coverage, or vehicle capacity.
+**Backend:**
+```bash
+uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend dashboard will be available at `http://localhost:5173`.
+API documentation will be available at `http://localhost:8000/docs`.
+
+---
+
+## Official Benchmark Instances
+
+- `data/A-n32-k5.vrp`
+- `data/A-n33-k5.vrp`
+- `data/B-n31-k5.vrp`

@@ -104,6 +104,8 @@ def test_validate_csv_failures():
     assert "strictly positive" in res4.json()["error"]
 
 
+import shutil
+
 def test_create_and_solve_custom_scenario():
     csv_data = """customer_id,location_name,latitude,longitude,demand
 1,Test Clinic 1,26.9200,75.7900,25
@@ -118,9 +120,14 @@ def test_create_and_solve_custom_scenario():
         "csv_content": csv_data,
         "auto_solve": True,
     }
-    response = client.post("/api/scenarios", json=payload)
-    assert response.status_code == 200
-    data = response.json()
-    assert data["metadata"]["name"] == "Custom Test Relief Operation"
-    assert data["is_solved"] is True
-    assert data["solution"]["validation"]["valid"] is True
+    test_scenario_dir = ROOT / "relief_scenarios" / "custom_test_relief_operation"
+    try:
+        response = client.post("/api/scenarios", json=payload)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["metadata"]["name"] == "Custom Test Relief Operation"
+        assert data["is_solved"] is True
+        assert data["solution"]["validation"]["valid"] is True
+    finally:
+        if test_scenario_dir.exists():
+            shutil.rmtree(test_scenario_dir, ignore_errors=True)

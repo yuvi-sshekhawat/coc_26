@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,14 +28,20 @@ from .services.scenario_store import (
     solve_scenario,
 )
 
-
-ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "results"
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_scenario_storage()
+    yield
+
 
 app = FastAPI(
     title="AI-05 Fair Relief Planner API",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -49,11 +56,6 @@ app.add_middleware(
 class HealthResponse(BaseModel):
     status: str
     stage: int = Field(10)
-
-
-@app.on_event("startup")
-def on_startup():
-    init_scenario_storage()
 
 
 @app.get("/api/health", response_model=HealthResponse)
