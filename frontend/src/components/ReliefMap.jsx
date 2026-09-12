@@ -331,7 +331,7 @@ export default function ReliefMap({
   // Update bounds, static markers, and route layers
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !scenario) return;
+    if (!map || !mapLoaded || !scenario) return;
 
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
@@ -368,6 +368,15 @@ export default function ReliefMap({
       .setLngLat([depotLon, depotLat])
       .setPopup(depotPopup)
       .addTo(map);
+
+    depotEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (depotPopup.isOpen()) {
+        depotPopup.remove();
+      } else {
+        depotPopup.setLngLat([depotLon, depotLat]).addTo(map);
+      }
+    });
 
     markersRef.current.push(depotMarker);
 
