@@ -1,4 +1,5 @@
 @echo off
+set PYTHONPATH=src
 set CANDIDATES=%CANDIDATES%
 if "%CANDIDATES%"=="" set CANDIDATES=30
 
